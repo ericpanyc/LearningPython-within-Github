@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 import re
+import json
 
 def get_name(content):
     name_index = content.find('gene_name')
@@ -26,4 +27,5 @@ with open(sys.argv[1], 'r') as f:
                 gene_name = get_name(l[8])
                 gene_profile = get_profile(gene_name, l[0], l[3], l[4])
                 all_genes.append(gene_profile)
-    print(all_genes)
+    with open('data.txt', 'w') as outfile:
+	json.dump(all_genes, outfile)
